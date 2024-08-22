@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Unity.Entities;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -36,11 +37,11 @@ public class InputManager : Singleton<InputManager>
 
     void Start()
     {
-        swipeControls.Touch.PrimaryContact.started += ctx => StartTouchPrimaryContact(ctx);
-        swipeControls.Touch.PrimaryContact.canceled += ctx => EndTouchPrimaryContact(ctx);
+        swipeControls.Touch.PrimaryContact.started += ctx => StartTouchPrimary(ctx);
+        swipeControls.Touch.PrimaryContact.canceled += ctx => EndTouchPrimary(ctx);
     }
 
-    private void EndTouchPrimaryContact(InputAction.CallbackContext ctx)
+    private void EndTouchPrimary(InputAction.CallbackContext ctx)
     {
         if (OnStartTouch != null)
         {
@@ -48,7 +49,7 @@ public class InputManager : Singleton<InputManager>
         }
     }
 
-    private void StartTouchPrimaryContact(InputAction.CallbackContext ctx)
+    private void StartTouchPrimary(InputAction.CallbackContext ctx)
     {
         if (OnStartTouch != null)
         {
