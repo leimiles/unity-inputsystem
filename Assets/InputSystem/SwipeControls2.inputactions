@@ -1,0 +1,193 @@
+{
+    "name": "SwipeControls2",
+    "maps": [
+        {
+            "name": "SwipeMap",
+            "id": "faf1286d-1130-4ea8-8f23-16d590699b18",
+            "actions": [
+                {
+                    "name": "SwipeActions",
+                    "type": "Value",
+                    "id": "d27a5241-0639-4d57-81cb-1df2078848e5",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "MouseAndPen",
+                    "id": "60bd716a-64bf-4675-b380-c16d5bf58a7b",
+                    "path": "PointerInput",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SwipeActions",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "contact",
+                    "id": "e76758b1-4318-4a02-ae83-3d21c41a2c4c",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Mouse",
+                    "action": "SwipeActions",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "contact",
+                    "id": "6012aab6-3bff-445b-9183-3f8257feec3a",
+                    "path": "<Pen>/tip",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Pen",
+                    "action": "SwipeActions",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "position",
+                    "id": "06dfaf7b-6a30-460f-8547-060c048fa6f8",
+                    "path": "<Mouse>/position",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Mouse",
+                    "action": "SwipeActions",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "position",
+                    "id": "293c4d11-ddc2-48cd-8ab7-af5b1cd90db5",
+                    "path": "<Pen>/position",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Pen",
+                    "action": "SwipeActions",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "tilt",
+                    "id": "b74e05ec-3524-4cbf-b07e-495a9d09594c",
+                    "path": "<Pen>/tilt",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Pen",
+                    "action": "SwipeActions",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "pressure",
+                    "id": "1ad2c534-ca2a-4dcd-8854-8e39c687bad6",
+                    "path": "<Pen>/pressure",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Pen",
+                    "action": "SwipeActions",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "twist",
+                    "id": "9cfd6f6f-97b3-4fba-a484-adffaa830393",
+                    "path": "<Pen>/twist",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Pen",
+                    "action": "SwipeActions",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "Touch0",
+                    "id": "c5420674-1302-48ad-ac10-599831103496",
+                    "path": "PointerInput",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SwipeActions",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "contact",
+                    "id": "614d4764-97c2-408e-b6e8-1bab9a94cadf",
+                    "path": "<Touchscreen>/touch0/press",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Touch",
+                    "action": "SwipeActions",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "position",
+                    "id": "7c4459f9-b9e9-4b00-a75f-40caf8631812",
+                    "path": "<Touchscreen>/touch0/position",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Touch",
+                    "action": "SwipeActions",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "radius",
+                    "id": "f86f72ff-f56e-47cc-991e-ee8e2570a19e",
+                    "path": "<Touchscreen>/touch0/radius",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Touch",
+                    "action": "SwipeActions",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "pressure",
+                    "id": "e4ba9e7b-cb5a-4115-8387-1c8e83ef832f",
+                    "path": "<Touchscreen>/touch0/pressure",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Touch",
+                    "action": "SwipeActions",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "inputId",
+                    "id": "98a9f0b1-cf70-4955-9947-7031ab7d64f3",
+                    "path": "<Touchscreen>/touch0/touchId",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Touch",
+                    "action": "SwipeActions",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                }
+            ]
+        }
+    ],
+    "controlSchemes": [
+        {
+            "name": "Mouse",
+            "bindingGroup": "Mouse",
+            "devices": []
+        },
+        {
+            "name": "Pen",
+            "bindingGroup": "Pen",
+            "devices": []
+        },
+        {
+            "name": "Touch",
+            "bindingGroup": "Touch",
+            "devices": []
+        }
+    ]
+}
