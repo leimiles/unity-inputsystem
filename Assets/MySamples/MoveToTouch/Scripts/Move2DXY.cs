@@ -13,7 +13,7 @@ public class Move2DXY : MonoBehaviour
 
     void Move()
     {
-        this.transform.position = MoveToTouchManager.WorldPositionTarget;
+        transform.position = MoveToTouchManager.WorldPositionTarget;
     }
 
 }
