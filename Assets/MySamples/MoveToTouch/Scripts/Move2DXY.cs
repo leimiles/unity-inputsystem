@@ -14,19 +14,33 @@ public class Move2DXY : MonoBehaviour
     [SerializeField]
     float fireRange = 0.1f;
 
+    [SerializeField]
+    Transform ownTarget;
+
     bool IsDirectionReady = false;
     bool IsRangeReady = false;
+    Vector3 targetPosition;
 
     void Update()
     {
-        if (MoveToTouchManager.EnemyTarget)
+        if (ownTarget)
         {
+            targetPosition = ownTarget.transform.position;
             Move(fireRange);
             Fire();
         }
         else
         {
-            Move(0.1f);
+            targetPosition = MoveToTouchManager.WorldPositionTarget;
+            if (MoveToTouchManager.EnemyTarget)
+            {
+                Move(fireRange);
+                Fire();
+            }
+            else
+            {
+                Move(0.1f);
+            }
         }
     }
 
@@ -40,7 +54,7 @@ public class Move2DXY : MonoBehaviour
 
     void Move(float range)
     {
-        Vector3 directionToTarget = (MoveToTouchManager.WorldPositionTarget - transform.position).normalized;
+        Vector3 directionToTarget = (targetPosition - transform.position).normalized;
         if (directionToTarget.magnitude != 0)
         {
             Quaternion targetRotation = Quaternion.LookRotation(directionToTarget, Vector3.up);
@@ -54,9 +68,9 @@ public class Move2DXY : MonoBehaviour
                 IsDirectionReady = true;
             }
         }
-        if (Vector3.Distance(transform.position, MoveToTouchManager.WorldPositionTarget) > range && IsDirectionReady)
+        if (Vector3.Distance(transform.position, targetPosition) > range)
         {
-            transform.position = Vector3.MoveTowards(transform.position, MoveToTouchManager.WorldPositionTarget, speed * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime);
             IsRangeReady = false;
         }
         else

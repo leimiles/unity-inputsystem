@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3587837200286385175}
   - component: {fileID: 142230750756099715}
   - component: {fileID: 1843594125584835779}
+  - component: {fileID: 1841805303112279618}
   m_Layer: 7
   m_Name: Miles
   m_TagString: Untagged
@@ -56,8 +57,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.1684151, y: 3.7190926, z: 1.2544937}
-  m_Center: {x: 0.005613804, y: 1.3334602, z: 0.08982134}
+  m_Size: {x: 1.1684151, y: 11.207909, z: 1.2544937}
+  m_Center: {x: 0.005613804, y: 1.8745022, z: 0.08982134}
 --- !u!114 &1843594125584835779
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -71,8 +72,36 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0.2
-  rotationSpeed: 360
-  fireRange: 0.1
+  rotationSpeed: 540
+  fireRange: 3
+  ownTarget: {fileID: 0}
+--- !u!54 &1841805303112279618
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 895843429947078199}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 10
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 84
+  m_CollisionDetection: 0
 --- !u!1 &3385048437500861978
 GameObject:
   m_ObjectHideFlags: 0

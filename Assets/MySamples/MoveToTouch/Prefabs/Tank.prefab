@@ -510,6 +510,7 @@ GameObject:
   - component: {fileID: 85367573446175153}
   - component: {fileID: 2676597765957948217}
   - component: {fileID: 2104351129143668696}
+  - component: {fileID: 8156824655883974452}
   m_Layer: 6
   m_Name: Tank
   m_TagString: Untagged
@@ -553,6 +554,7 @@ MonoBehaviour:
   speed: 5
   rotationSpeed: 720
   fireRange: 5
+  ownTarget: {fileID: 0}
 --- !u!65 &2104351129143668696
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -572,8 +574,35 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 0.693012, z: 1.6697913}
-  m_Center: {x: 0, y: -0.24519107, z: 0.1594741}
+  m_Size: {x: 1, y: 2.0298429, z: 1.6697913}
+  m_Center: {x: 0, y: -0.3170394, z: 0.15947407}
+--- !u!54 &8156824655883974452
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8125562694930358210}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 84
+  m_CollisionDetection: 0
 --- !u!1 &9031527596141906883
 GameObject:
   m_ObjectHideFlags: 0

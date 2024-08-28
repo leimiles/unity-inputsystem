@@ -215,6 +215,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Miles (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 1843594125584835779, guid: 4c162e181da59d54e96ac4c27ca08bd1,
+        type: 3}
+      propertyPath: ownTarget
+      value: 
+      objectReference: {fileID: 1003270564}
+    - target: {fileID: 1843594125584835779, guid: 4c162e181da59d54e96ac4c27ca08bd1,
+        type: 3}
+      propertyPath: rotationSpeed
+      value: 540
+      objectReference: {fileID: 0}
     - target: {fileID: 3587837200286385175, guid: 4c162e181da59d54e96ac4c27ca08bd1,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -223,7 +233,7 @@ PrefabInstance:
     - target: {fileID: 3587837200286385175, guid: 4c162e181da59d54e96ac4c27ca08bd1,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.47
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3587837200286385175, guid: 4c162e181da59d54e96ac4c27ca08bd1,
         type: 3}
@@ -427,6 +437,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Miles (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 1843594125584835779, guid: 4c162e181da59d54e96ac4c27ca08bd1,
+        type: 3}
+      propertyPath: ownTarget
+      value: 
+      objectReference: {fileID: 1003270564}
+    - target: {fileID: 1843594125584835779, guid: 4c162e181da59d54e96ac4c27ca08bd1,
+        type: 3}
+      propertyPath: rotationSpeed
+      value: 540
+      objectReference: {fileID: 0}
     - target: {fileID: 3587837200286385175, guid: 4c162e181da59d54e96ac4c27ca08bd1,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -435,7 +455,7 @@ PrefabInstance:
     - target: {fileID: 3587837200286385175, guid: 4c162e181da59d54e96ac4c27ca08bd1,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.47
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3587837200286385175, guid: 4c162e181da59d54e96ac4c27ca08bd1,
         type: 3}
@@ -759,6 +779,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Miles (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 1843594125584835779, guid: 4c162e181da59d54e96ac4c27ca08bd1,
+        type: 3}
+      propertyPath: ownTarget
+      value: 
+      objectReference: {fileID: 1003270564}
+    - target: {fileID: 1843594125584835779, guid: 4c162e181da59d54e96ac4c27ca08bd1,
+        type: 3}
+      propertyPath: rotationSpeed
+      value: 540
+      objectReference: {fileID: 0}
     - target: {fileID: 3587837200286385175, guid: 4c162e181da59d54e96ac4c27ca08bd1,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -767,7 +797,7 @@ PrefabInstance:
     - target: {fileID: 3587837200286385175, guid: 4c162e181da59d54e96ac4c27ca08bd1,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.47
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3587837200286385175, guid: 4c162e181da59d54e96ac4c27ca08bd1,
         type: 3}
@@ -944,6 +974,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Miles (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 1843594125584835779, guid: 4c162e181da59d54e96ac4c27ca08bd1,
+        type: 3}
+      propertyPath: ownTarget
+      value: 
+      objectReference: {fileID: 1003270564}
+    - target: {fileID: 1843594125584835779, guid: 4c162e181da59d54e96ac4c27ca08bd1,
+        type: 3}
+      propertyPath: rotationSpeed
+      value: 540
+      objectReference: {fileID: 0}
     - target: {fileID: 3587837200286385175, guid: 4c162e181da59d54e96ac4c27ca08bd1,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -952,7 +992,7 @@ PrefabInstance:
     - target: {fileID: 3587837200286385175, guid: 4c162e181da59d54e96ac4c27ca08bd1,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.47
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3587837200286385175, guid: 4c162e181da59d54e96ac4c27ca08bd1,
         type: 3}
@@ -1018,6 +1058,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Miles (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 1843594125584835779, guid: 4c162e181da59d54e96ac4c27ca08bd1,
+        type: 3}
+      propertyPath: ownTarget
+      value: 
+      objectReference: {fileID: 1003270564}
     - target: {fileID: 3587837200286385175, guid: 4c162e181da59d54e96ac4c27ca08bd1,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1026,7 +1071,7 @@ PrefabInstance:
     - target: {fileID: 3587837200286385175, guid: 4c162e181da59d54e96ac4c27ca08bd1,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.47
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3587837200286385175, guid: 4c162e181da59d54e96ac4c27ca08bd1,
         type: 3}
