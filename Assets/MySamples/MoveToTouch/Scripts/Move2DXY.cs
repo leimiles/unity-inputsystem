@@ -7,30 +7,62 @@ using UnityEngine;
 public class Move2DXY : MonoBehaviour
 {
     [SerializeField]
-    float speed = 5f;
+    float speed = 5.0f;
     [SerializeField]
-    float rotationSpeed = 720f;
+    float rotationSpeed = 720.0f;
+
+    [SerializeField]
+    float fireRange = 0.1f;
+
+    bool IsDirectionReady = false;
+    bool IsRangeReady = false;
 
     void Update()
     {
-        Move();
+        if (MoveToTouchManager.EnemyTarget)
+        {
+            Move(fireRange);
+            Fire();
+        }
+        else
+        {
+            Move(0.1f);
+        }
     }
 
-    void Move()
+    void Fire()
     {
-        if (Vector3.Distance(transform.position, MoveToTouchManager.WorldPositionTarget) > 0.1f)
+        if (IsDirectionReady && IsRangeReady)
         {
-            Vector3 directionToTarget = (MoveToTouchManager.WorldPositionTarget - transform.position).normalized;
+            Debug.Log("bang");
+        }
 
+    }
+
+    void Move(float range)
+    {
+        Vector3 directionToTarget = (MoveToTouchManager.WorldPositionTarget - transform.position).normalized;
+        if (directionToTarget.magnitude != 0)
+        {
             Quaternion targetRotation = Quaternion.LookRotation(directionToTarget, Vector3.up);
-
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
-
-            if (Quaternion.Angle(transform.rotation, targetRotation) < 1f)      // rotate first?
+            if (Quaternion.Angle(transform.rotation, targetRotation) > 1.0f)
             {
-                transform.position = Vector3.MoveTowards(transform.position, MoveToTouchManager.WorldPositionTarget, speed * Time.deltaTime);
+                transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+                IsDirectionReady = false;
             }
-
+            else
+            {
+                IsDirectionReady = true;
+            }
+        }
+        if (Vector3.Distance(transform.position, MoveToTouchManager.WorldPositionTarget) > range && IsDirectionReady)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, MoveToTouchManager.WorldPositionTarget, speed * Time.deltaTime);
+            IsRangeReady = false;
+        }
+        else
+        {
+            IsRangeReady = true;
         }
     }
 
