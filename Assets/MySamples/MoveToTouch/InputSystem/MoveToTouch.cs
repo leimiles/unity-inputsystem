@@ -35,6 +35,15 @@ public partial class @MoveToTouch: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Fire"",
+                    ""type"": ""Button"",
+                    ""id"": ""847b13bb-273d-4d03-a554-7d1f23bb9d1c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -46,6 +55,17 @@ public partial class @MoveToTouch: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""Touch"",
                     ""action"": ""MoveTo"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b59bc5c0-4f25-4cfe-b72f-fded946dc5be"",
+                    ""path"": ""<Touchscreen>/primaryTouch/press"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Touch"",
+                    ""action"": ""Fire"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -63,6 +83,7 @@ public partial class @MoveToTouch: IInputActionCollection2, IDisposable
         // Miles
         m_Miles = asset.FindActionMap("Miles", throwIfNotFound: true);
         m_Miles_MoveTo = m_Miles.FindAction("MoveTo", throwIfNotFound: true);
+        m_Miles_Fire = m_Miles.FindAction("Fire", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -125,11 +146,13 @@ public partial class @MoveToTouch: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Miles;
     private List<IMilesActions> m_MilesActionsCallbackInterfaces = new List<IMilesActions>();
     private readonly InputAction m_Miles_MoveTo;
+    private readonly InputAction m_Miles_Fire;
     public struct MilesActions
     {
         private @MoveToTouch m_Wrapper;
         public MilesActions(@MoveToTouch wrapper) { m_Wrapper = wrapper; }
         public InputAction @MoveTo => m_Wrapper.m_Miles_MoveTo;
+        public InputAction @Fire => m_Wrapper.m_Miles_Fire;
         public InputActionMap Get() { return m_Wrapper.m_Miles; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -142,6 +165,9 @@ public partial class @MoveToTouch: IInputActionCollection2, IDisposable
             @MoveTo.started += instance.OnMoveTo;
             @MoveTo.performed += instance.OnMoveTo;
             @MoveTo.canceled += instance.OnMoveTo;
+            @Fire.started += instance.OnFire;
+            @Fire.performed += instance.OnFire;
+            @Fire.canceled += instance.OnFire;
         }
 
         private void UnregisterCallbacks(IMilesActions instance)
@@ -149,6 +175,9 @@ public partial class @MoveToTouch: IInputActionCollection2, IDisposable
             @MoveTo.started -= instance.OnMoveTo;
             @MoveTo.performed -= instance.OnMoveTo;
             @MoveTo.canceled -= instance.OnMoveTo;
+            @Fire.started -= instance.OnFire;
+            @Fire.performed -= instance.OnFire;
+            @Fire.canceled -= instance.OnFire;
         }
 
         public void RemoveCallbacks(IMilesActions instance)
@@ -178,5 +207,6 @@ public partial class @MoveToTouch: IInputActionCollection2, IDisposable
     public interface IMilesActions
     {
         void OnMoveTo(InputAction.CallbackContext context);
+        void OnFire(InputAction.CallbackContext context);
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
+[DisallowMultipleComponent]
 public class Move2DXY : MonoBehaviour
 {
     [SerializeField]
@@ -25,7 +26,7 @@ public class Move2DXY : MonoBehaviour
 
             transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
 
-            if (Quaternion.Angle(transform.rotation, targetRotation) < 1f)
+            if (Quaternion.Angle(transform.rotation, targetRotation) < 1f)      // rotate first?
             {
                 transform.position = Vector3.MoveTowards(transform.position, MoveToTouchManager.WorldPositionTarget, speed * Time.deltaTime);
             }

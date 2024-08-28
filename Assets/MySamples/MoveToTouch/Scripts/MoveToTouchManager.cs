@@ -18,7 +18,8 @@ public class MoveToTouchManager : MonoBehaviour
     {
         mainCamera = Camera.main;
         inputActions = new MoveToTouch();
-        inputActions.Miles.MoveTo.performed += OnAction;      // this action bound to touch contact, every pressing works
+        inputActions.Miles.MoveTo.performed += MoveTo;      // this action bound to touch contact, every pressing works
+        inputActions.Miles.Fire.started += Fire;
         if (touchDepthObject != null)
         {
             touchDepth = touchDepthObject.transform.position.z;
@@ -37,9 +38,13 @@ public class MoveToTouchManager : MonoBehaviour
         inputActions?.Disable();
     }
 
-    private void OnAction(InputAction.CallbackContext context)
+    private void MoveTo(InputAction.CallbackContext context)
     {
         SetWorldPosition(context.ReadValue<Vector2>());
+    }
+
+    private void Fire(InputAction.CallbackContext context)
+    {
     }
 
     public void SetWorldPosition(Vector2 screenPostion)
