@@ -15,13 +15,13 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Swipe",
-                    "type": "Button",
+                    "name": "Touch",
+                    "type": "Value",
                     "id": "897e33bc-52e6-46dc-9bc8-202c6e92d79b",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": false
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -83,11 +83,11 @@
                 {
                     "name": "",
                     "id": "e77e8a48-215e-493f-9143-12a337a0c1ac",
-                    "path": "",
+                    "path": "<Touchscreen>/primaryTouch/position",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Swipe",
+                    "action": "Touch",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
