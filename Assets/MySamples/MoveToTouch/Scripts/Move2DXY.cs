@@ -34,7 +34,6 @@ public class Move2DXY : MonoBehaviour
     {
         if (IsDirectionReady && IsRangeReady)
         {
-            Debug.Log("bang");
         }
 
     }
