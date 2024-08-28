@@ -22,7 +22,7 @@ public class Move2DXY : MonoBehaviour
         {
             Vector3 directionToTarget = (MoveToTouchManager.WorldPositionTarget - transform.position).normalized;
 
-            Quaternion targetRotation = Quaternion.LookRotation(directionToTarget, Vector3.back);
+            Quaternion targetRotation = Quaternion.LookRotation(directionToTarget, Vector3.up);
 
             transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
 

@@ -11,8 +11,7 @@ public class MoveToTouchManager : MonoBehaviour
     public static Vector3 WorldPositionTarget = Vector3.zero;
 
     [SerializeField]
-    Transform touchDepthObject;
-    float touchDepth = 0.0f;    // set camera at 0, 0, 0, world space, this value is there object z
+    float touchDepth = 20.0f;    // set camera at 0, 0, 0, world space, this value is there object z
 
     void Awake()
     {
@@ -20,11 +19,8 @@ public class MoveToTouchManager : MonoBehaviour
         inputActions = new MoveToTouch();
         inputActions.Miles.MoveTo.performed += MoveTo;      // this action bound to touch contact, every pressing works
         inputActions.Miles.Fire.started += Fire;
-        if (touchDepthObject != null)
-        {
-            touchDepth = touchDepthObject.transform.position.z;
-        }
-        WorldPositionTarget.z = touchDepth;
+
+        //WorldPositionTarget.y = touchDepth;
 
     }
 
