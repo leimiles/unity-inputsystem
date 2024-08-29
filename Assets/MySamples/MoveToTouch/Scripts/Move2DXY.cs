@@ -17,10 +17,19 @@ public class Move2DXY : MonoBehaviour
     [SerializeField]
     Transform ownTarget;
 
+    //[SerializeField]
+    float fireInterval = 3.0f;
+    float reloadingTime;
+
     bool IsDirectionReady = false;
     bool IsRangeReady = false;
     Vector3 targetPosition;
     Vector3 targetDirection;
+
+    void Start()
+    {
+        reloadingTime = fireInterval;
+    }
 
     void Update()
     {
@@ -43,14 +52,23 @@ public class Move2DXY : MonoBehaviour
                 Move(0.1f);
             }
         }
+
+        if (reloadingTime < fireInterval)
+        {
+            reloadingTime += Time.deltaTime;
+        }
     }
 
     void Fire()
     {
         if (IsDirectionReady && IsRangeReady)
         {
+            if (reloadingTime >= fireInterval)
+            {
+                Debug.Log(this.name + " Fires");
+                reloadingTime = 0.0f;
+            }
         }
-
     }
 
     void Move(float range)
