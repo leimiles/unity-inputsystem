@@ -6,19 +6,13 @@ using UnityEngine;
 [DisallowMultipleComponent]
 public class Move2DXY : MonoBehaviour
 {
-    [SerializeField]
-    float speed = 5.0f;
-    [SerializeField]
-    float rotationSpeed = 720.0f;
-
-    [SerializeField]
-    float fireRange = 0.1f;
-
-    [SerializeField]
-    Transform ownTarget;
-
-    //[SerializeField]
-    float fireInterval = 3.0f;
+    [SerializeField] Transform ownTarget;
+    [SerializeField] GameObject bullet;
+    [SerializeField] float moveSpeed = 5.0f;
+    [SerializeField] float rotationSpeed = 720.0f;
+    [SerializeField] float fireRange = 5.0f;
+    [SerializeField] float fireInterval = 3.0f;
+    [SerializeField] float fireSpeed = 5.0f;
     float reloadingTime;
 
     bool IsDirectionReady = false;
@@ -61,11 +55,17 @@ public class Move2DXY : MonoBehaviour
 
     void Fire()
     {
+        if (bullet == null)
+        {
+            return;
+        }
         if (IsDirectionReady && IsRangeReady)
         {
             if (reloadingTime >= fireInterval)
             {
-                Debug.Log(this.name + " Fires");
+                var newBullet = Instantiate(bullet, this.transform.position, this.transform.rotation);
+                newBullet.GetComponent<Bullet>().TargetPosition = targetPosition;
+                newBullet.GetComponent<Bullet>().Speed = fireSpeed;
                 reloadingTime = 0.0f;
             }
         }
@@ -89,7 +89,7 @@ public class Move2DXY : MonoBehaviour
         }
         if (Vector3.Distance(transform.position, targetPosition) > range)
         {
-            transform.position = Vector3.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
             IsRangeReady = false;
         }
         else

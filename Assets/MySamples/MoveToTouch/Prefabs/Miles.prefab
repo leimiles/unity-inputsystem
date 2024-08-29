@@ -71,10 +71,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fb4c8853d29dc6408b80fb86c4be721, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0.2
+  ownTarget: {fileID: 0}
+  bullet: {fileID: 0}
+  moveSpeed: 1
   rotationSpeed: 540
   fireRange: 3
-  ownTarget: {fileID: 0}
+  fireInterval: 3
+  fireSpeed: 5
 --- !u!54 &1841805303112279618
 Rigidbody:
   m_ObjectHideFlags: 0
