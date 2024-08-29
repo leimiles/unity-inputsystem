@@ -26,9 +26,9 @@ public class GameRules : MonoBehaviour
 
     void Update()
     {
+        WinSignAnim();
         if (move2DXYs_Enemy != null)
         {
-            Debug.Log(move2DXYs_Enemy.Count);
             if (move2DXYs_Enemy.Count == 0)
             {
                 winSign.SetActive(true);
@@ -43,6 +43,11 @@ public class GameRules : MonoBehaviour
 
         }
 
+    }
+
+    void WinSignAnim()
+    {
+        winSign.transform.localScale = Vector3.one * 4 * (Mathf.Abs(MathF.Sin(Time.realtimeSinceStartup)));
     }
 
     public static void SetEnemies(Move2DXY move2DXY)
