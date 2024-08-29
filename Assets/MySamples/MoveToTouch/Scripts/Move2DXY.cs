@@ -24,6 +24,14 @@ public class Move2DXY : MonoBehaviour
     void Start()
     {
         reloadingTime = fireInterval;
+        if (this.gameObject.layer == LayerMask.NameToLayer("Enemies"))
+        {
+            GameRules.SetEnemies(this);
+        }
+        else if (this.gameObject.layer == LayerMask.NameToLayer("Players"))
+        {
+            GameRules.SetPlayer(this);
+        }
     }
 
     void Update()
@@ -74,6 +82,7 @@ public class Move2DXY : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
+        GameRules.RemoveEnemy(this);
         Destroy(gameObject);
     }
 

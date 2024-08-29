@@ -590,7 +590,7 @@ MonoBehaviour:
   fireRange: 10
   fireInterval: 3
   fireSpeed: 8
-  fireOrigin: {fileID: 0}
+  fireOrigin: {fileID: 5334224368298406990}
 --- !u!65 &2104351129143668696
 BoxCollider:
   m_ObjectHideFlags: 0
