@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5686908484099556665}
   - component: {fileID: 784521278026594301}
   m_Layer: 0
-  m_Name: BulletOrigin
+  m_Name: MilesBullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -47,9 +47,9 @@ BoxCollider:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 128
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3

@@ -6,13 +6,14 @@ using UnityEngine;
 [DisallowMultipleComponent]
 public class Move2DXY : MonoBehaviour
 {
-    [SerializeField] Transform ownTarget;
+    [SerializeField] Transform attackTarget;
     [SerializeField] GameObject bullet;
     [SerializeField] float moveSpeed = 5.0f;
     [SerializeField] float rotationSpeed = 720.0f;
     [SerializeField] float fireRange = 5.0f;
     [SerializeField] float fireInterval = 3.0f;
     [SerializeField] float fireSpeed = 5.0f;
+    [SerializeField] Transform fireOrigin;
     float reloadingTime;
 
     bool IsDirectionReady = false;
@@ -27,9 +28,9 @@ public class Move2DXY : MonoBehaviour
 
     void Update()
     {
-        if (ownTarget)
+        if (attackTarget)
         {
-            targetPosition = ownTarget.transform.position;
+            targetPosition = attackTarget.transform.position;
             Move(fireRange);
             Fire();
         }
@@ -63,12 +64,17 @@ public class Move2DXY : MonoBehaviour
         {
             if (reloadingTime >= fireInterval)
             {
-                var newBullet = Instantiate(bullet, this.transform.position, this.transform.rotation);
+                var newBullet = Instantiate(bullet, (fireOrigin == null) ? this.transform.position : fireOrigin.position, this.transform.rotation);
                 newBullet.GetComponent<Bullet>().TargetPosition = targetPosition;
                 newBullet.GetComponent<Bullet>().Speed = fireSpeed;
                 reloadingTime = 0.0f;
             }
         }
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        Destroy(gameObject);
     }
 
     void Move(float range)

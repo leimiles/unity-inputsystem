@@ -333,6 +333,37 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &5468109241096687894
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5334224368298406990}
+  m_Layer: 0
+  m_Name: FireOrigin
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5334224368298406990
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5468109241096687894}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.193, z: 1.015}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 85367573446175153}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7324529868660818062
 GameObject:
   m_ObjectHideFlags: 0
@@ -537,6 +568,7 @@ Transform:
   - {fileID: 7118758279716522343}
   - {fileID: 4407851227128272168}
   - {fileID: 8930484420012533785}
+  - {fileID: 5334224368298406990}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!114 &2676597765957948217
@@ -551,10 +583,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fb4c8853d29dc6408b80fb86c4be721, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
+  attackTarget: {fileID: 0}
+  bullet: {fileID: 2095038721952299954, guid: 9f75026df4f26b448b9cbc847109dd08, type: 3}
+  moveSpeed: 5
   rotationSpeed: 720
-  fireRange: 5
-  ownTarget: {fileID: 0}
+  fireRange: 10
+  fireInterval: 3
+  fireSpeed: 8
+  fireOrigin: {fileID: 0}
 --- !u!65 &2104351129143668696
 BoxCollider:
   m_ObjectHideFlags: 0
