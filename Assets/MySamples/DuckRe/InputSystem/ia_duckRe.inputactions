@@ -1,0 +1,34 @@
+{
+    "name": "ia_duckRe",
+    "maps": [
+        {
+            "name": "DuckRe",
+            "id": "482d1d02-9f59-4425-becb-93632d5adba3",
+            "actions": [
+                {
+                    "name": "TouchScreen",
+                    "type": "Button",
+                    "id": "83198c49-4fc4-428f-83d8-6b7dc7cd518d",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "cc9303ae-d0fc-47f4-88ba-543395cf65d0",
+                    "path": "<Touchscreen>/primaryTouch/press",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "TouchScreen",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
