@@ -20,6 +20,7 @@ public class Move2DXY : MonoBehaviour
     bool IsDirectionReady = false;
     bool IsRangeReady = false;
     Vector3 targetPosition;
+    Vector3 targetDirection;
 
     void Update()
     {
@@ -54,10 +55,10 @@ public class Move2DXY : MonoBehaviour
 
     void Move(float range)
     {
-        Vector3 directionToTarget = (targetPosition - transform.position).normalized;
-        if (directionToTarget.magnitude != 0)
+        targetDirection = (targetPosition - transform.position).normalized;
+        if (targetDirection.magnitude != 0)
         {
-            Quaternion targetRotation = Quaternion.LookRotation(directionToTarget, Vector3.up);
+            Quaternion targetRotation = Quaternion.LookRotation(targetDirection, Vector3.up);
             if (Quaternion.Angle(transform.rotation, targetRotation) > 1.0f)
             {
                 transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);

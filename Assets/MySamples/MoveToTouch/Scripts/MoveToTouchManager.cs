@@ -11,7 +11,6 @@ public class MoveToTouchManager : MonoBehaviour
     MoveToTouch inputActions;
     public static Vector3 WorldPositionTarget = Vector3.zero;
     public static Transform EnemyTarget;
-
     public LayerMask touchHitLayer;
 
     [SerializeField]
@@ -22,7 +21,6 @@ public class MoveToTouchManager : MonoBehaviour
         mainCamera = Camera.main;
         inputActions = new MoveToTouch();
         inputActions.Miles.MoveTo.performed += MoveTo;      // this action bound to touch contact, every pressing works
-        inputActions.Miles.Fire.started += Fire;
     }
 
     void OnEnable()
@@ -38,10 +36,6 @@ public class MoveToTouchManager : MonoBehaviour
     private void MoveTo(InputAction.CallbackContext context)
     {
         SetWorldPosition(context.ReadValue<Vector2>());
-    }
-
-    private void Fire(InputAction.CallbackContext context)
-    {
     }
 
     private void SetWorldPosition(Vector2 screenPostion)
