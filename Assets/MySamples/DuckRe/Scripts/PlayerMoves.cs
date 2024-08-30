@@ -33,4 +33,9 @@ public class PlayerMovement : MonoBehaviour
     {
         attackDirection = Vector3.back;
     }
+
+    public void OnAttack()
+    {
+        Debug.Log("sent");
+    }
 }

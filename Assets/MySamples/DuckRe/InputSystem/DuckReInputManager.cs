@@ -11,23 +11,24 @@ public class DuckReInputManager : MonoBehaviour
     void Awake()
     {
         inputActions = new Ia_duckRe();
-        inputActions.DuckRe.Attack.started += OnAction;
-        inputActions.DuckRe.Position.performed += ClickPostion;
+        inputActions.DuckRe.Attack.started += TouchOn;
+        inputActions.DuckRe.Position.performed += Test;
     }
 
-    private void ClickPostion(InputAction.CallbackContext context)
+    private void Test(InputAction.CallbackContext context)
     {
         debugText.text = context.ReadValue<Vector2>().ToString();
     }
 
 
-    private void OnAction(InputAction.CallbackContext context)
+    private void TouchOn(InputAction.CallbackContext context)
     {
         if (!DuckReGameplay.gameStart)
         {
             DuckReGameplay.gameStart = true;
         }
         Debug.Log("clicked");
+        //debugText.text = context.action.ReadValue<Vector2>().ToString();
     }
 
     void OnEnable()

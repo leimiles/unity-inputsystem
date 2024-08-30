@@ -39,7 +39,7 @@ public partial class @Ia_duckRe: IInputActionCollection2, IDisposable
                 {
                     ""name"": ""Position"",
                     ""type"": ""Value"",
-                    ""id"": ""4ebcb868-facd-475f-8189-51de47a48b88"",
+                    ""id"": ""db079d1a-caf4-4f8e-bc2c-328a5cf5093d"",
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -60,8 +60,8 @@ public partial class @Ia_duckRe: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""3ba6607e-5475-40ca-9e6b-2ccc317bb4c5"",
-                    ""path"": ""<Touchscreen>/primaryTouch/startPosition"",
+                    ""id"": ""3fd47c31-74ed-4117-a89e-7646aa18abb3"",
+                    ""path"": ""<Touchscreen>/touch0/position"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
