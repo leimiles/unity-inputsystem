@@ -3,23 +3,21 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
+// this script is not needed if using player input component
 [DisallowMultipleComponent]
 public class DuckReInputManager : MonoBehaviour
 {
-    [SerializeField] Text debugText;
     Ia_duckRe inputActions;
     void Awake()
     {
         inputActions = new Ia_duckRe();
-        inputActions.DuckRe.Attack.started += TouchOn;
-        inputActions.DuckRe.Position.performed += Test;
+        inputActions.DuckRe.TouchPosition.performed += TouchPosition;
+        inputActions.DuckRe.TouchOn.started += TouchOn;
     }
 
-    private void Test(InputAction.CallbackContext context)
+    private void TouchPosition(InputAction.CallbackContext context)
     {
-        debugText.text = context.ReadValue<Vector2>().ToString();
     }
-
 
     private void TouchOn(InputAction.CallbackContext context)
     {
@@ -27,8 +25,6 @@ public class DuckReInputManager : MonoBehaviour
         {
             DuckReGameplay.gameStart = true;
         }
-        Debug.Log("clicked");
-        //debugText.text = context.action.ReadValue<Vector2>().ToString();
     }
 
     void OnEnable()

@@ -6,7 +6,7 @@
             "id": "482d1d02-9f59-4425-becb-93632d5adba3",
             "actions": [
                 {
-                    "name": "Attack",
+                    "name": "TouchOn",
                     "type": "Button",
                     "id": "83198c49-4fc4-428f-83d8-6b7dc7cd518d",
                     "expectedControlType": "Button",
@@ -15,9 +15,9 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Position",
+                    "name": "TouchPosition",
                     "type": "Value",
-                    "id": "db079d1a-caf4-4f8e-bc2c-328a5cf5093d",
+                    "id": "4f789ef5-c893-4a9a-8ce4-0fe44ce888c3",
                     "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": "",
@@ -32,18 +32,18 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Attack",
+                    "action": "TouchOn",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "3fd47c31-74ed-4117-a89e-7646aa18abb3",
-                    "path": "<Touchscreen>/touch0/position",
+                    "id": "f4d15665-31b4-4ec3-8231-d6afe1bef164",
+                    "path": "<Touchscreen>/touch0/startPosition",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Position",
+                    "action": "TouchPosition",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
