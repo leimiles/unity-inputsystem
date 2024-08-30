@@ -1,15 +1,22 @@
-using Unity.VisualScripting;
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 [DisallowMultipleComponent]
 public class PlayerMovement : MonoBehaviour
 {
+    [SerializeField] LayerMask buttonLayer;
+    [SerializeField] Text debugText;
+
     Vector3 attackDirection;
     float rotationSpeed = 2160.0f;
+    bool canAttack = false;
+    Camera mainCamera;
     void Start()
     {
         attackDirection = transform.forward;
+        mainCamera = Camera.main;
     }
     void Update()
     {
@@ -21,7 +28,12 @@ public class PlayerMovement : MonoBehaviour
         Quaternion targetRotation = Quaternion.LookRotation(attackDirection, Vector3.up);
         if (Quaternion.Angle(transform.rotation, targetRotation) > 1.0f)
         {
+            canAttack = false;
             transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+        }
+        else
+        {
+            canAttack = true;
         }
     }
 
@@ -35,17 +47,28 @@ public class PlayerMovement : MonoBehaviour
         attackDirection = Vector3.back;
     }
 
+    // invoked by playerinput which is a part of input system
     public void OnTouchPosition(InputValue inputValue)
     {
-        if (inputValue != null)
+        debugText.text = inputValue.Get<Vector2>().ToString();
+    }
+
+    private void GetButtonNameByInputPosition(Vector2 screenPosition)
+    {
+        Ray ray = mainCamera.ScreenPointToRay(screenPosition);
+        RaycastHit raycastHit;
+        if (Physics.Raycast(ray, out raycastHit, Mathf.Infinity, buttonLayer))
         {
-            //Debug.Log(inputValue.Get<Vector2>());
         }
     }
+
 
     public void OnTouchOn(InputValue inputValue)
     {
         //Debug.Log("clicked");
         attackDirection.z *= -1.0f;
+
+        //GetButtonNameByInputPosition(touchButtonPosition);
+        //Debug.Log(inputValue.Get<Vector2>());
     }
 }
