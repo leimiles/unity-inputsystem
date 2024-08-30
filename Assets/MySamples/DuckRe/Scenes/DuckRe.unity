@@ -245,7 +245,7 @@ GameObject:
   - component: {fileID: 282193870}
   - component: {fileID: 282193869}
   m_Layer: 5
-  m_Name: BottomRight
+  m_Name: BottomFront
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -377,7 +377,7 @@ GameObject:
   - component: {fileID: 593772671}
   - component: {fileID: 593772670}
   m_Layer: 5
-  m_Name: MiddleLeft
+  m_Name: MiddleBack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -509,7 +509,7 @@ GameObject:
   - component: {fileID: 1189804660}
   - component: {fileID: 1189804659}
   m_Layer: 5
-  m_Name: TopLeft
+  m_Name: TopBack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -578,9 +578,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: KongFu, Assembly-CSharp
-        m_MethodName: TopLeftFight
+      - m_Target: {fileID: 2066663009}
+        m_TargetAssemblyTypeName: PlayerMovement, Assembly-CSharp
+        m_MethodName: TurnBack
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -641,7 +641,7 @@ GameObject:
   - component: {fileID: 1272747210}
   - component: {fileID: 1272747209}
   m_Layer: 5
-  m_Name: MiddleRight
+  m_Name: MiddleFront
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -773,7 +773,7 @@ GameObject:
   - component: {fileID: 1499134675}
   - component: {fileID: 1499134674}
   m_Layer: 5
-  m_Name: TopRight
+  m_Name: TopFront
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -842,9 +842,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: KongFu, Assembly-CSharp
-        m_MethodName: TopRightFight
+      - m_Target: {fileID: 2066663009}
+        m_TargetAssemblyTypeName: PlayerMovement, Assembly-CSharp
+        m_MethodName: TurnFront
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1347,7 +1347,7 @@ GameObject:
   - component: {fileID: 1998537860}
   - component: {fileID: 1998537859}
   m_Layer: 5
-  m_Name: BottomLeft
+  m_Name: BottomBack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1475,6 +1475,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2066663008}
+  - component: {fileID: 2066663009}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1498,6 +1499,18 @@ Transform:
   - {fileID: 35397546}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2066663009
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2066663007}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5634968a6a69fa442888e6810001a34e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
