@@ -28,24 +28,44 @@ public partial class @Ia_duckRe: IInputActionCollection2, IDisposable
             ""id"": ""482d1d02-9f59-4425-becb-93632d5adba3"",
             ""actions"": [
                 {
-                    ""name"": ""TouchScreen"",
+                    ""name"": ""Attack"",
                     ""type"": ""Button"",
                     ""id"": ""83198c49-4fc4-428f-83d8-6b7dc7cd518d"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
-                    ""initialStateCheck"": false
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Position"",
+                    ""type"": ""Value"",
+                    ""id"": ""4ebcb868-facd-475f-8189-51de47a48b88"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
                 {
                     ""name"": """",
                     ""id"": ""cc9303ae-d0fc-47f4-88ba-543395cf65d0"",
-                    ""path"": ""<Touchscreen>/primaryTouch/press"",
+                    ""path"": ""<Touchscreen>/touch0/press"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""TouchScreen"",
+                    ""action"": ""Attack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3ba6607e-5475-40ca-9e6b-2ccc317bb4c5"",
+                    ""path"": ""<Touchscreen>/primaryTouch/startPosition"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Position"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -56,7 +76,8 @@ public partial class @Ia_duckRe: IInputActionCollection2, IDisposable
 }");
         // DuckRe
         m_DuckRe = asset.FindActionMap("DuckRe", throwIfNotFound: true);
-        m_DuckRe_TouchScreen = m_DuckRe.FindAction("TouchScreen", throwIfNotFound: true);
+        m_DuckRe_Attack = m_DuckRe.FindAction("Attack", throwIfNotFound: true);
+        m_DuckRe_Position = m_DuckRe.FindAction("Position", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -118,12 +139,14 @@ public partial class @Ia_duckRe: IInputActionCollection2, IDisposable
     // DuckRe
     private readonly InputActionMap m_DuckRe;
     private List<IDuckReActions> m_DuckReActionsCallbackInterfaces = new List<IDuckReActions>();
-    private readonly InputAction m_DuckRe_TouchScreen;
+    private readonly InputAction m_DuckRe_Attack;
+    private readonly InputAction m_DuckRe_Position;
     public struct DuckReActions
     {
         private @Ia_duckRe m_Wrapper;
         public DuckReActions(@Ia_duckRe wrapper) { m_Wrapper = wrapper; }
-        public InputAction @TouchScreen => m_Wrapper.m_DuckRe_TouchScreen;
+        public InputAction @Attack => m_Wrapper.m_DuckRe_Attack;
+        public InputAction @Position => m_Wrapper.m_DuckRe_Position;
         public InputActionMap Get() { return m_Wrapper.m_DuckRe; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -133,16 +156,22 @@ public partial class @Ia_duckRe: IInputActionCollection2, IDisposable
         {
             if (instance == null || m_Wrapper.m_DuckReActionsCallbackInterfaces.Contains(instance)) return;
             m_Wrapper.m_DuckReActionsCallbackInterfaces.Add(instance);
-            @TouchScreen.started += instance.OnTouchScreen;
-            @TouchScreen.performed += instance.OnTouchScreen;
-            @TouchScreen.canceled += instance.OnTouchScreen;
+            @Attack.started += instance.OnAttack;
+            @Attack.performed += instance.OnAttack;
+            @Attack.canceled += instance.OnAttack;
+            @Position.started += instance.OnPosition;
+            @Position.performed += instance.OnPosition;
+            @Position.canceled += instance.OnPosition;
         }
 
         private void UnregisterCallbacks(IDuckReActions instance)
         {
-            @TouchScreen.started -= instance.OnTouchScreen;
-            @TouchScreen.performed -= instance.OnTouchScreen;
-            @TouchScreen.canceled -= instance.OnTouchScreen;
+            @Attack.started -= instance.OnAttack;
+            @Attack.performed -= instance.OnAttack;
+            @Attack.canceled -= instance.OnAttack;
+            @Position.started -= instance.OnPosition;
+            @Position.performed -= instance.OnPosition;
+            @Position.canceled -= instance.OnPosition;
         }
 
         public void RemoveCallbacks(IDuckReActions instance)
@@ -162,6 +191,7 @@ public partial class @Ia_duckRe: IInputActionCollection2, IDisposable
     public DuckReActions @DuckRe => new DuckReActions(this);
     public interface IDuckReActions
     {
-        void OnTouchScreen(InputAction.CallbackContext context);
+        void OnAttack(InputAction.CallbackContext context);
+        void OnPosition(InputAction.CallbackContext context);
     }
 }
