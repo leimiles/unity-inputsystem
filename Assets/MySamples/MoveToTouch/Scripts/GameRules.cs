@@ -37,7 +37,10 @@ public class GameRules : MonoBehaviour
 
         if (player == null)
         {
-            move2DXYs_Enemy.Clear();
+            if (move2DXYs_Enemy != null)
+            {
+                move2DXYs_Enemy.Clear();
+            }
             player = null;
             SceneManager.LoadScene(sceneName);
 
