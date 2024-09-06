@@ -4,16 +4,14 @@ using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 [DisallowMultipleComponent]
-public class PlayerMovement : MonoBehaviour
+public class DuckMoves : MonoBehaviour
 {
-    Vector3 attackDirection;
+    public static Vector3 attackDirection;
     float rotationSpeed = 2160.0f;
     bool canAttack = false;
-    Camera mainCamera;
     void Start()
     {
         attackDirection = transform.forward;
-        mainCamera = Camera.main;
     }
     void Update()
     {

@@ -25,6 +25,7 @@ public class DuckReInputManager : MonoBehaviour
     private void TouchOn(InputAction.CallbackContext context)
     {
         Vector2 position = context.action.ReadValue<Vector2>();
+        SetAttackDirection(position.x);
         GetButtonNameByInputPosition(position);
     }
 
@@ -45,7 +46,22 @@ public class DuckReInputManager : MonoBehaviour
         RaycastHit raycastHit;
         if (Physics.Raycast(ray, out raycastHit, Mathf.Infinity, touchButtonLayer))
         {
-            debugText.text = raycastHit.collider.gameObject.name;
+            /*
+            KongFu kongFu = raycastHit.collider.GetComponent<KongFu>();
+            kongFu.PlayMove();
+            */
+        }
+    }
+
+    private void SetAttackDirection(float touchPositionX)
+    {
+        if (Screen.width * 0.5f - touchPositionX > 0)
+        {
+            DuckMoves.attackDirection = Vector3.back;
+        }
+        else
+        {
+            DuckMoves.attackDirection = Vector3.forward;
         }
     }
 }
