@@ -6,9 +6,6 @@ using UnityEngine.UI;
 [DisallowMultipleComponent]
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] LayerMask buttonLayer;
-    [SerializeField] Text debugText;
-
     Vector3 attackDirection;
     float rotationSpeed = 2160.0f;
     bool canAttack = false;
@@ -37,29 +34,4 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-
-    public void TurnFront()
-    {
-        attackDirection = Vector3.forward;
-    }
-    public void TurnBack()
-    {
-        attackDirection = Vector3.back;
-    }
-
-    // invoked by playerinput which is a part of input system
-    public void OnTouchPosition(InputValue inputValue)
-    {
-        Debug.Log("pos");
-        debugText.text = inputValue.Get<Vector2>().ToString();
-    }
-
-    private void GetButtonNameByInputPosition(Vector2 screenPosition)
-    {
-        Ray ray = mainCamera.ScreenPointToRay(screenPosition);
-        RaycastHit raycastHit;
-        if (Physics.Raycast(ray, out raycastHit, Mathf.Infinity, buttonLayer))
-        {
-        }
-    }
 }

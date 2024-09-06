@@ -7,17 +7,25 @@ using UnityEngine.UI;
 [DisallowMultipleComponent]
 public class DuckReInputManager : MonoBehaviour
 {
+    [SerializeField] Text debugText;
+    [SerializeField] LayerMask touchButtonLayer;
     Ia_duckRe inputActions;
+    Camera mainCamera;
     void Awake()
     {
         inputActions = new Ia_duckRe();
         inputActions.DuckRe.TouchOn.started += TouchOn;
     }
 
+    void Start()
+    {
+        mainCamera = Camera.main;
+    }
+
     private void TouchOn(InputAction.CallbackContext context)
     {
-        Debug.Log("clicked");
-        Debug.Log(context.action.ReadValue<Vector2>().ToString());
+        Vector2 position = context.action.ReadValue<Vector2>();
+        GetButtonNameByInputPosition(position);
     }
 
     void OnEnable()
@@ -28,5 +36,16 @@ public class DuckReInputManager : MonoBehaviour
     void OnDisable()
     {
         inputActions?.Disable();
+    }
+
+
+    private void GetButtonNameByInputPosition(Vector2 screenPosition)
+    {
+        Ray ray = mainCamera.ScreenPointToRay(screenPosition);
+        RaycastHit raycastHit;
+        if (Physics.Raycast(ray, out raycastHit, Mathf.Infinity, touchButtonLayer))
+        {
+            debugText.text = raycastHit.collider.gameObject.name;
+        }
     }
 }
