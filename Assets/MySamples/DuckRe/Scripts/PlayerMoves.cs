@@ -50,6 +50,7 @@ public class PlayerMovement : MonoBehaviour
     // invoked by playerinput which is a part of input system
     public void OnTouchPosition(InputValue inputValue)
     {
+        Debug.Log("pos");
         debugText.text = inputValue.Get<Vector2>().ToString();
     }
 
@@ -60,15 +61,5 @@ public class PlayerMovement : MonoBehaviour
         if (Physics.Raycast(ray, out raycastHit, Mathf.Infinity, buttonLayer))
         {
         }
-    }
-
-
-    public void OnTouchOn(InputValue inputValue)
-    {
-        //Debug.Log("clicked");
-        attackDirection.z *= -1.0f;
-
-        //GetButtonNameByInputPosition(touchButtonPosition);
-        //Debug.Log(inputValue.Get<Vector2>());
     }
 }
