@@ -238,6 +238,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainCamera: {fileID: 618593874}
   mainLight: {fileID: 771032561}
+  eyesOnTargetDistance: 10
 --- !u!114 &543375115
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -251,6 +252,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DebugText: {fileID: 1269344186}
+  rotationController: {fileID: 0}
 --- !u!1 &618593872
 GameObject:
   m_ObjectHideFlags: 0
@@ -710,7 +712,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
   m_AnchoredPosition: {x: 0, y: -300}
-  m_SizeDelta: {x: 160, y: 30}
+  m_SizeDelta: {x: 300, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1269344186
 MonoBehaviour:
@@ -820,7 +822,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1195171466319871067, guid: fcc7af2c39e88ec4bafc0826a0f889c1,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1638449334}
   m_SourcePrefab: {fileID: 100100000, guid: fcc7af2c39e88ec4bafc0826a0f889c1, type: 3}
 --- !u!4 &1425031383 stripped
 Transform:
@@ -828,6 +834,35 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1425031382}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1638449332 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1195171466319871067, guid: fcc7af2c39e88ec4bafc0826a0f889c1,
+    type: 3}
+  m_PrefabInstance: {fileID: 1425031382}
+  m_PrefabAsset: {fileID: 0}
+--- !u!136 &1638449334
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1638449332}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 2.2804775
+  m_Direction: 1
+  m_Center: {x: 0, y: 1.0378098, z: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
