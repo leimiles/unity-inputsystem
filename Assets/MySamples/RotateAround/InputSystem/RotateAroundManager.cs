@@ -37,15 +37,9 @@ public class SetSlideSpeed2D : MonoBehaviour
 
     void SlideEnd(InputAction.CallbackContext context)
     {
-        SetSlideSpeed();
         CountSystem.Active = false;
         DebugText.text = CountSystem.GetTimePassed().ToString();
         CountSystem.Reset();
-    }
-
-    void SetSlideSpeed()
-    {
-
     }
 
     void SlidingOnScreen(InputAction.CallbackContext context)
@@ -101,7 +95,7 @@ public class SetSlideSpeed2D : MonoBehaviour
             return timePassedInSeconds;
         }
 
-        static string FormatTimeToString()
+        static string GetFormatTimeString()
         {
             int minutes = Mathf.FloorToInt(timePassedInSeconds / 60F);
             int seconds = Mathf.FloorToInt(timePassedInSeconds - minutes * 60);
