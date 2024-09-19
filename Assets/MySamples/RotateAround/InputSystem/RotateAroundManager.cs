@@ -1,23 +1,28 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 [DisallowMultipleComponent]
-public class SetSlideSpeed2D : MonoBehaviour
+public class RotateAroundManager : MonoBehaviour
 {
     [SerializeField] Text DebugText;
-    [SerializeField] RotationController rotationController;
+    //[SerializeField] RotationController rotationController;
     RotateAround ia_RotateAround;
+    Camera mainCamera;
+    static Vector3 hitPosition = Vector3.zero;
+    public static Vector3 HitPosition { get => hitPosition; set => hitPosition = value; }
+    public static SphericalCoordinateSystem sphericalCoordinateSystem;
 
     void Awake()
     {
-        if (rotationController == null)
+        if (Camera.main == null)
         {
-            if (!TryGetComponent<RotationController>(out rotationController))
-            {
-                return;
-            }
-
+            return;
+        }
+        else
+        {
+            mainCamera = Camera.main;
         }
         ia_RotateAround = new RotateAround();
         ia_RotateAround.Rotate.ClickOnTarget.started += SetEyesOnTargetPosition;
@@ -42,26 +47,37 @@ public class SetSlideSpeed2D : MonoBehaviour
         CountSystem.Reset();
     }
 
+    Vector2 firstTouchPositionOnScreen;
     void SlidingOnScreen(InputAction.CallbackContext context)
     {
-        //DebugText.text = context.action.ReadValue<Vector2>().ToString();
+        Vector2 slidingPosition = context.action.ReadValue<Vector2>();
+        float offsetX = slidingPosition.x - firstTouchPositionOnScreen.x;
+        float offsetY = slidingPosition.y - firstTouchPositionOnScreen.y;
+        sphericalCoordinateSystem.AzimuthalAngle -= offsetX / Screen.width * Time.deltaTime * 10.0f;
+        sphericalCoordinateSystem.PolarAngle += offsetY / Screen.height * Time.deltaTime * 20.0f;
     }
 
     private void SetEyesOnTargetPosition(InputAction.CallbackContext context)
     {
         CountSystem.Active = true;
         Vector2 touchPositionOnScreen = context.action.ReadValue<Vector2>();
-        Ray ray = rotationController.MainCamera.ScreenPointToRay(touchPositionOnScreen);
+        firstTouchPositionOnScreen = touchPositionOnScreen;
+        Ray ray = mainCamera.ScreenPointToRay(touchPositionOnScreen);
         RaycastHit raycastHit;
         if (Physics.Raycast(ray, out raycastHit))
         {
-            rotationController.EyesOnTargetPosition = raycastHit.point;
+            HitPosition = raycastHit.point;
         }
-        else
-        {
-            rotationController.EyesOnTargetPosition = Vector3.zero;
-        }
+
     }
+
+
+
+    void Start()
+    {
+        sphericalCoordinateSystem = new SphericalCoordinateSystem(mainCamera.transform.position);
+    }
+
 
     void Update()
     {
@@ -105,6 +121,72 @@ public class SetSlideSpeed2D : MonoBehaviour
 
     }
 
+    public class SphericalCoordinateSystem
+    {
+        float radius;
+        public float Radius
+        {
+            get => radius;
+            set
+            {
+                radius = value;
+                if (value < 0)
+                {
+                    radius = 0;
+                }
+            }
+        }
 
+        float polarAngle;
+        /// <summary>
+        /// use radian to set angle, 0 <= polarAngle <= 180
+        /// </summary>
+        public float PolarAngle
+        {
+            get => polarAngle;
+            //set => polarAngle = value;
+            set
+            {
+                polarAngle = value;
+
+                if (polarAngle < 0.1745f)
+                {
+                    polarAngle = 0.1745f;
+                }
+                if (polarAngle > 2.9671f)
+                {
+                    polarAngle = 2.9671f;
+                }
+            }
+        }
+
+        float azimuthalAngle;
+        /// <summary>
+        /// use radian to set angle, 0 <= azimuthalAngle <= 360
+        /// </summary>
+        public float AzimuthalAngle
+        {
+            get => azimuthalAngle;
+            set => azimuthalAngle = value;
+        }
+
+        public SphericalCoordinateSystem(Vector3 position)
+        {
+            radius = Mathf.Sqrt(position.x * position.x + position.y * position.y + position.z * position.z);
+            polarAngle = Mathf.Acos(position.y / radius);       // unity uses y-up
+            azimuthalAngle = Mathf.Atan2(position.z, position.x);
+        }
+
+        public Vector3 GetCartesianPosition()
+        {
+            Vector3 cartesianCoordinate = Vector3.zero;
+
+            cartesianCoordinate.x = radius * Mathf.Sin(polarAngle) * Mathf.Cos(azimuthalAngle);
+            cartesianCoordinate.z = radius * Mathf.Sin(polarAngle) * Mathf.Sin(azimuthalAngle);
+            cartesianCoordinate.y = radius * Mathf.Cos(polarAngle);     // unity uses y-up
+            return cartesianCoordinate;
+        }
+
+    }
 
 }
