@@ -1,13 +1,11 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.UI;
 
 [DisallowMultipleComponent]
 public class RotateAroundManager : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI textMeshProUGUI;
-    //[SerializeField] RotationController rotationController;
     RotateAround ia_RotateAround;
     Camera mainCamera;
     static Vector3 hitPosition = Vector3.zero;
@@ -43,7 +41,9 @@ public class RotateAroundManager : MonoBehaviour
     void SlideEnd(InputAction.CallbackContext context)
     {
         CountSystem.Active = false;
-        textMeshProUGUI.text = (slideOffset / CountSystem.GetTimePassed()).ToString();
+        Vector2 energy2D = slideOffset / CountSystem.GetTimePassed();
+        textMeshProUGUI.text = energy2D.ToString();
+        sphericalCoordinateSystem.SetEnergyX(energy2D.x);
         CountSystem.Reset();
     }
 
@@ -56,7 +56,7 @@ public class RotateAroundManager : MonoBehaviour
         Vector2 slidingPosition = context.action.ReadValue<Vector2>();
         slideOffset.x = (slidingPosition.x - firstTouchPositionOnScreen.x) / Screen.width;
         slideOffset.y = (slidingPosition.y - firstTouchPositionOnScreen.y) / Screen.height;
-        sphericalCoordinateSystem.AzimuthalAngle -= slideOffset.x * Time.deltaTime * 20.0f;
+        //sphericalCoordinateSystem.AzimuthalAngle -= slideOffset.x * Time.deltaTime * 20.0f;
         sphericalCoordinateSystem.PolarAngle += slideOffset.y * Time.deltaTime * 20.0f;
     }
 
@@ -85,6 +85,7 @@ public class RotateAroundManager : MonoBehaviour
     void Update()
     {
         CountSystem.Count();
+        sphericalCoordinateSystem.AutoRotate();
     }
 
 
@@ -107,18 +108,6 @@ public class RotateAroundManager : MonoBehaviour
                 timePassedInSeconds += Time.deltaTime;
             }
 
-        }
-
-        public static void Fade()
-        {
-            if (timePassedInSeconds > 0.0f)
-            {
-                timePassedInSeconds -= Time.deltaTime;
-            }
-            else
-            {
-                timePassedInSeconds = 0.0f;
-            }
         }
 
         public static float GetTimePassed()
@@ -175,14 +164,23 @@ public class RotateAroundManager : MonoBehaviour
             }
         }
 
+        float energyX;
+        public void SetEnergyX(float energy)
+        {
+            energyX = energy;
+        }
         public void AutoRotate()
         {
-        }
-
-        Vector2 energy2D = Vector2.zero;
-        public void SetRotationEnergy(Vector2 energy2D)
-        {
-            this.energy2D = energy2D;
+            if (energyX > 0.01)
+            {
+                energyX -= Time.deltaTime * 2.0f;
+                this.azimuthalAngle += Time.deltaTime * energyX;
+            }
+            if (energyX < -0.01)
+            {
+                energyX += Time.deltaTime * 2.0f;
+                this.azimuthalAngle += Time.deltaTime * energyX;
+            }
         }
 
         float azimuthalAngle;
@@ -194,7 +192,6 @@ public class RotateAroundManager : MonoBehaviour
             get => azimuthalAngle;
             set => azimuthalAngle = value;
         }
-
         public SphericalCoordinateSystem(Vector3 position)
         {
             radius = Mathf.Sqrt(position.x * position.x + position.y * position.y + position.z * position.z);
