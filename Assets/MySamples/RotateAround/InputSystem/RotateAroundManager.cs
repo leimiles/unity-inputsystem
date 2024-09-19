@@ -6,8 +6,7 @@ using UnityEngine.UI;
 [DisallowMultipleComponent]
 public class RotateAroundManager : MonoBehaviour
 {
-    [SerializeField] Text DebugText;
-    [SerializeField] TextMeshPro textMeshPro;
+    [SerializeField] TextMeshProUGUI textMeshProUGUI;
     //[SerializeField] RotationController rotationController;
     RotateAround ia_RotateAround;
     Camera mainCamera;
@@ -44,7 +43,7 @@ public class RotateAroundManager : MonoBehaviour
     void SlideEnd(InputAction.CallbackContext context)
     {
         CountSystem.Active = false;
-        DebugText.text = (slideOffset / CountSystem.GetTimePassed()).ToString();
+        textMeshProUGUI.text = (slideOffset / CountSystem.GetTimePassed()).ToString();
         CountSystem.Reset();
     }
 

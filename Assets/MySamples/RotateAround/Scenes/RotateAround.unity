@@ -273,8 +273,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ce20a7d70e32cd40b2f4a0e024b6c87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DebugText: {fileID: 1269344186}
-  textMeshPro: {fileID: 0}
+  textMeshProUGUI: {fileID: 2002006132}
 --- !u!1 &618593872
 GameObject:
   m_ObjectHideFlags: 0
