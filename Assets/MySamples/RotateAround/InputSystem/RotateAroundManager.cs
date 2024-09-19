@@ -43,18 +43,21 @@ public class RotateAroundManager : MonoBehaviour
     void SlideEnd(InputAction.CallbackContext context)
     {
         CountSystem.Active = false;
-        DebugText.text = CountSystem.GetTimePassed().ToString();
+        DebugText.text = (slideOffset / CountSystem.GetTimePassed()).ToString();
         CountSystem.Reset();
     }
 
-    Vector2 firstTouchPositionOnScreen;
+
+
+    Vector2 firstTouchPositionOnScreen = Vector2.zero;
+    Vector2 slideOffset = Vector2.zero;
     void SlidingOnScreen(InputAction.CallbackContext context)
     {
         Vector2 slidingPosition = context.action.ReadValue<Vector2>();
-        float offsetX = slidingPosition.x - firstTouchPositionOnScreen.x;
-        float offsetY = slidingPosition.y - firstTouchPositionOnScreen.y;
-        sphericalCoordinateSystem.AzimuthalAngle -= offsetX / Screen.width * Time.deltaTime * 10.0f;
-        sphericalCoordinateSystem.PolarAngle += offsetY / Screen.height * Time.deltaTime * 20.0f;
+        slideOffset.x = (slidingPosition.x - firstTouchPositionOnScreen.x) / Screen.width;
+        slideOffset.y = (slidingPosition.y - firstTouchPositionOnScreen.y) / Screen.height;
+        sphericalCoordinateSystem.AzimuthalAngle -= slideOffset.x * Time.deltaTime * 10.0f;
+        sphericalCoordinateSystem.PolarAngle += slideOffset.y * Time.deltaTime * 20.0f;
     }
 
     private void SetEyesOnTargetPosition(InputAction.CallbackContext context)
@@ -104,6 +107,18 @@ public class RotateAroundManager : MonoBehaviour
                 timePassedInSeconds += Time.deltaTime;
             }
 
+        }
+
+        public static void Fade()
+        {
+            if (timePassedInSeconds > 0.0f)
+            {
+                timePassedInSeconds -= Time.deltaTime;
+            }
+            else
+            {
+                timePassedInSeconds = 0.0f;
+            }
         }
 
         public static float GetTimePassed()
@@ -158,6 +173,16 @@ public class RotateAroundManager : MonoBehaviour
                     polarAngle = 2.9671f;
                 }
             }
+        }
+
+        public void AutoRotate()
+        {
+        }
+
+        Vector2 energy2D = Vector2.zero;
+        public void SetRotationEnergy(Vector2 energy2D)
+        {
+            this.energy2D = energy2D;
         }
 
         float azimuthalAngle;
