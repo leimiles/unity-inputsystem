@@ -221,7 +221,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 543375113}
-  - component: {fileID: 543375114}
   - component: {fileID: 543375115}
   m_Layer: 0
   m_Name: RotationInput
@@ -245,22 +244,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &543375114
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 543375112}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 13a9f2f5165b54f47b657df71c11fc6a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  lookAtTarget: {fileID: 1116494962}
-  lookAtTargetMoveSpeed: 10
-  mainCamera: {fileID: 618593874}
-  mainLight: {fileID: 771032561}
 --- !u!114 &543375115
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -274,6 +257,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textMeshProUGUI: {fileID: 2002006132}
+  lookAtTarget: {fileID: 1116494962}
+  lookAtTargetMoveSpeed: 10
 --- !u!1 &618593872
 GameObject:
   m_ObjectHideFlags: 0

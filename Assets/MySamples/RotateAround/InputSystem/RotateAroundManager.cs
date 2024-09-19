@@ -6,11 +6,12 @@ using UnityEngine.InputSystem;
 public class RotateAroundManager : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI textMeshProUGUI;
+    [SerializeField] Transform lookAtTarget;
+    [SerializeField] float lookAtTargetMoveSpeed = 10.0f;
     RotateAround ia_RotateAround;
     Camera mainCamera;
     static Vector3 hitPosition = Vector3.zero;
-    public static Vector3 HitPosition { get => hitPosition; set => hitPosition = value; }
-    public static SphericalCoordinateSystem sphericalCoordinateSystem;
+    static SphericalCoordinateSystem sphericalCoordinateSystem;
 
     void Awake()
     {
@@ -25,7 +26,7 @@ public class RotateAroundManager : MonoBehaviour
         ia_RotateAround = new RotateAround();
         ia_RotateAround.Rotate.ClickOnTarget.started += SetEyesOnTargetPosition;
         ia_RotateAround.Rotate.ClickOnTarget.canceled += SlideEnd;
-        ia_RotateAround.Rotate.CameraLookAround.performed += SlidingOnScreen;
+        ia_RotateAround.Rotate.CameraRotateAround.performed += SlidingOnScreen;
     }
 
     void OnEnable()
@@ -42,9 +43,13 @@ public class RotateAroundManager : MonoBehaviour
     {
         CountSystem.Active = false;
         Vector2 energy2D = slideOffset / CountSystem.GetTimePassed();
-        textMeshProUGUI.text = energy2D.ToString();
-        sphericalCoordinateSystem.SetEnergyX(energy2D.x);
+        sphericalCoordinateSystem.SetEnergyX(energy2D.x, true);
         CountSystem.Reset();
+    }
+
+    void SetLookAtTargetPosition()
+    {
+        lookAtTarget.position = Vector3.MoveTowards(lookAtTarget.position, hitPosition, Time.deltaTime * lookAtTargetMoveSpeed);
     }
 
 
@@ -69,7 +74,8 @@ public class RotateAroundManager : MonoBehaviour
         RaycastHit raycastHit;
         if (Physics.Raycast(ray, out raycastHit))
         {
-            HitPosition = raycastHit.point;
+            sphericalCoordinateSystem.SetEnergyX(0.0f);
+            hitPosition = raycastHit.point;
         }
 
     }
@@ -78,14 +84,30 @@ public class RotateAroundManager : MonoBehaviour
 
     void Start()
     {
+        if (mainCamera == null)
+        {
+            return;
+        }
         sphericalCoordinateSystem = new SphericalCoordinateSystem(mainCamera.transform.position);
     }
 
 
     void Update()
     {
+        if (mainCamera == null || lookAtTarget == null)
+        {
+            return;
+        }
         CountSystem.Count();
+        textMeshProUGUI.text = sphericalCoordinateSystem.EnergyX.ToString();
         sphericalCoordinateSystem.AutoRotate();
+        SetMainCameraPosition();
+        SetLookAtTargetPosition();
+    }
+
+    void SetMainCameraPosition()
+    {
+        mainCamera.transform.position = sphericalCoordinateSystem.GetCartesianPosition();
     }
 
 
@@ -125,7 +147,7 @@ public class RotateAroundManager : MonoBehaviour
 
     }
 
-    public class SphericalCoordinateSystem
+    class SphericalCoordinateSystem
     {
         float radius;
         public float Radius
@@ -165,9 +187,24 @@ public class RotateAroundManager : MonoBehaviour
         }
 
         float energyX;
-        public void SetEnergyX(float energy)
+        public void SetEnergyX(float energy, bool useAccumulation = false)
         {
-            energyX = energy;
+            if (useAccumulation)
+            {
+                energyX += energy;
+            }
+            else
+            {
+                energyX = energy;
+            }
+
+        }
+        public float EnergyX
+        {
+            get
+            {
+                return energyX;
+            }
         }
         public void AutoRotate()
         {

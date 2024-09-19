@@ -37,7 +37,7 @@ public partial class @RotateAround: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
-                    ""name"": ""CameraLookAround"",
+                    ""name"": ""CameraRotateAround"",
                     ""type"": ""Value"",
                     ""id"": ""c1d7617b-c99e-45de-9365-f2ab387dc9af"",
                     ""expectedControlType"": ""Vector2"",
@@ -87,7 +87,7 @@ public partial class @RotateAround: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""CameraLookAround"",
+                    ""action"": ""CameraRotateAround"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -99,7 +99,7 @@ public partial class @RotateAround: IInputActionCollection2, IDisposable
         // Rotate
         m_Rotate = asset.FindActionMap("Rotate", throwIfNotFound: true);
         m_Rotate_ClickOnTarget = m_Rotate.FindAction("ClickOnTarget", throwIfNotFound: true);
-        m_Rotate_CameraLookAround = m_Rotate.FindAction("CameraLookAround", throwIfNotFound: true);
+        m_Rotate_CameraRotateAround = m_Rotate.FindAction("CameraRotateAround", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -162,13 +162,13 @@ public partial class @RotateAround: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Rotate;
     private List<IRotateActions> m_RotateActionsCallbackInterfaces = new List<IRotateActions>();
     private readonly InputAction m_Rotate_ClickOnTarget;
-    private readonly InputAction m_Rotate_CameraLookAround;
+    private readonly InputAction m_Rotate_CameraRotateAround;
     public struct RotateActions
     {
         private @RotateAround m_Wrapper;
         public RotateActions(@RotateAround wrapper) { m_Wrapper = wrapper; }
         public InputAction @ClickOnTarget => m_Wrapper.m_Rotate_ClickOnTarget;
-        public InputAction @CameraLookAround => m_Wrapper.m_Rotate_CameraLookAround;
+        public InputAction @CameraRotateAround => m_Wrapper.m_Rotate_CameraRotateAround;
         public InputActionMap Get() { return m_Wrapper.m_Rotate; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -181,9 +181,9 @@ public partial class @RotateAround: IInputActionCollection2, IDisposable
             @ClickOnTarget.started += instance.OnClickOnTarget;
             @ClickOnTarget.performed += instance.OnClickOnTarget;
             @ClickOnTarget.canceled += instance.OnClickOnTarget;
-            @CameraLookAround.started += instance.OnCameraLookAround;
-            @CameraLookAround.performed += instance.OnCameraLookAround;
-            @CameraLookAround.canceled += instance.OnCameraLookAround;
+            @CameraRotateAround.started += instance.OnCameraRotateAround;
+            @CameraRotateAround.performed += instance.OnCameraRotateAround;
+            @CameraRotateAround.canceled += instance.OnCameraRotateAround;
         }
 
         private void UnregisterCallbacks(IRotateActions instance)
@@ -191,9 +191,9 @@ public partial class @RotateAround: IInputActionCollection2, IDisposable
             @ClickOnTarget.started -= instance.OnClickOnTarget;
             @ClickOnTarget.performed -= instance.OnClickOnTarget;
             @ClickOnTarget.canceled -= instance.OnClickOnTarget;
-            @CameraLookAround.started -= instance.OnCameraLookAround;
-            @CameraLookAround.performed -= instance.OnCameraLookAround;
-            @CameraLookAround.canceled -= instance.OnCameraLookAround;
+            @CameraRotateAround.started -= instance.OnCameraRotateAround;
+            @CameraRotateAround.performed -= instance.OnCameraRotateAround;
+            @CameraRotateAround.canceled -= instance.OnCameraRotateAround;
         }
 
         public void RemoveCallbacks(IRotateActions instance)
@@ -214,6 +214,6 @@ public partial class @RotateAround: IInputActionCollection2, IDisposable
     public interface IRotateActions
     {
         void OnClickOnTarget(InputAction.CallbackContext context);
-        void OnCameraLookAround(InputAction.CallbackContext context);
+        void OnCameraRotateAround(InputAction.CallbackContext context);
     }
 }

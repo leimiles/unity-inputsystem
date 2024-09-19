@@ -15,7 +15,7 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "CameraLookAround",
+                    "name": "CameraRotateAround",
                     "type": "Value",
                     "id": "c1d7617b-c99e-45de-9365-f2ab387dc9af",
                     "expectedControlType": "Vector2",
@@ -65,7 +65,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "CameraLookAround",
+                    "action": "CameraRotateAround",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
