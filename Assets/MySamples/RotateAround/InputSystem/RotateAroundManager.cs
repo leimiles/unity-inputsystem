@@ -1,4 +1,4 @@
-using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class RotateAroundManager : MonoBehaviour
 {
     [SerializeField] Text DebugText;
+    [SerializeField] TextMeshPro textMeshPro;
     //[SerializeField] RotationController rotationController;
     RotateAround ia_RotateAround;
     Camera mainCamera;
@@ -56,7 +57,7 @@ public class RotateAroundManager : MonoBehaviour
         Vector2 slidingPosition = context.action.ReadValue<Vector2>();
         slideOffset.x = (slidingPosition.x - firstTouchPositionOnScreen.x) / Screen.width;
         slideOffset.y = (slidingPosition.y - firstTouchPositionOnScreen.y) / Screen.height;
-        sphericalCoordinateSystem.AzimuthalAngle -= slideOffset.x * Time.deltaTime * 10.0f;
+        sphericalCoordinateSystem.AzimuthalAngle -= slideOffset.x * Time.deltaTime * 20.0f;
         sphericalCoordinateSystem.PolarAngle += slideOffset.y * Time.deltaTime * 20.0f;
     }
 
