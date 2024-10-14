@@ -12,6 +12,10 @@ public class RotateAroundManager : MonoBehaviour
     Camera mainCamera;
     static Vector3 hitPosition = Vector3.zero;
     static SphericalCoordinateSystem sphericalCoordinateSystem;
+    static Vector2 m_1stFingerStartPosition = Vector2.zero;
+    static Vector2 m_1stFingerPosition = Vector2.zero;
+    static Vector2 m_2ndFingerStartPosition = Vector2.zero;
+    static Vector2 m_2ndFingerPosition = Vector2.zero;
 
     void Awake()
     {
@@ -24,9 +28,11 @@ public class RotateAroundManager : MonoBehaviour
             mainCamera = Camera.main;
         }
         ia_RotateAround = new RotateAround();
-        ia_RotateAround.Rotate.ClickOnTarget.started += SetEyesOnTargetPosition;
-        ia_RotateAround.Rotate.ClickOnTarget.canceled += SlideEnd;
-        ia_RotateAround.Rotate.CameraRotateAround.performed += SlidingOnScreen;
+        ia_RotateAround.Rotate.Finger0.started += SlideStart;
+        ia_RotateAround.Rotate.Finger0.performed += Sliding;
+        ia_RotateAround.Rotate.Finger0.canceled += SlideEnd;
+        ia_RotateAround.Rotate.Finger1.started += ZoomStart;
+        ia_RotateAround.Rotate.Finger1.performed += Zooming;
     }
 
     void OnEnable()
@@ -52,24 +58,40 @@ public class RotateAroundManager : MonoBehaviour
         lookAtTarget.position = Vector3.MoveTowards(lookAtTarget.position, hitPosition, Time.deltaTime * lookAtTargetMoveSpeed);
     }
 
+    void ZoomStart(InputAction.CallbackContext context)
+    {
+        m_2ndFingerStartPosition = context.action.ReadValue<Vector2>();
+    }
 
+    void Zooming(InputAction.CallbackContext context)
+    {
+        m_2ndFingerPosition = context.action.ReadValue<Vector2>();
+        //float distanceBetweenFingers = Vector2.Distance(firstTouchPositionOnScreenSliding, context.action.ReadValue<Vector2>());
+        //sphericalCoordinateSystem.Radius += 1.0f * Time.deltaTime;
+    }
 
-    Vector2 firstTouchPositionOnScreen = Vector2.zero;
     Vector2 slideOffset = Vector2.zero;
-    void SlidingOnScreen(InputAction.CallbackContext context)
+    void Sliding(InputAction.CallbackContext context)
     {
         Vector2 slidingPosition = context.action.ReadValue<Vector2>();
-        slideOffset.x = (slidingPosition.x - firstTouchPositionOnScreen.x) / Screen.width;
-        slideOffset.y = (slidingPosition.y - firstTouchPositionOnScreen.y) / Screen.height;
+        m_1stFingerPosition = slidingPosition;
+
+        if (ia_RotateAround.Rotate.Finger1.phase == InputActionPhase.Started)
+        {
+            return;
+        }
+
+        slideOffset.x = (slidingPosition.x - m_1stFingerStartPosition.x) / Screen.width;
+        slideOffset.y = (slidingPosition.y - m_1stFingerStartPosition.y) / Screen.height;
         //sphericalCoordinateSystem.AzimuthalAngle -= slideOffset.x * Time.deltaTime * 20.0f;
         sphericalCoordinateSystem.PolarAngle += slideOffset.y * Time.deltaTime * 20.0f;
     }
 
-    private void SetEyesOnTargetPosition(InputAction.CallbackContext context)
+    private void SlideStart(InputAction.CallbackContext context)
     {
         CountSystem.Active = true;
         Vector2 touchPositionOnScreen = context.action.ReadValue<Vector2>();
-        firstTouchPositionOnScreen = touchPositionOnScreen;
+        m_1stFingerStartPosition = touchPositionOnScreen;
         Ray ray = mainCamera.ScreenPointToRay(touchPositionOnScreen);
         RaycastHit raycastHit;
         if (Physics.Raycast(ray, out raycastHit))
@@ -94,7 +116,7 @@ public class RotateAroundManager : MonoBehaviour
 
     void Update()
     {
-        if (mainCamera == null || lookAtTarget == null)
+        if (mainCamera == null || lookAtTarget == null || sphericalCoordinateSystem == null)
         {
             return;
         }
@@ -103,6 +125,9 @@ public class RotateAroundManager : MonoBehaviour
         sphericalCoordinateSystem.AutoRotate();
         SetMainCameraPosition();
         SetLookAtTargetPosition();
+
+        //Debug.Log("CameraRotateAround: " + ia_RotateAround.Rotate.ClickOnTarget.phase);
+        //Debug.Log("CameraZoom: " + ia_RotateAround.Rotate.CameraZoom.phase);
     }
 
     void SetMainCameraPosition()

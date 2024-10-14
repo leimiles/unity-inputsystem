@@ -28,18 +28,18 @@ public partial class @RotateAround: IInputActionCollection2, IDisposable
             ""id"": ""13611451-b5e1-425f-8262-8cd61f7d88a5"",
             ""actions"": [
                 {
-                    ""name"": ""ClickOnTarget"",
+                    ""name"": ""Finger0"",
                     ""type"": ""Value"",
-                    ""id"": ""0ea892f7-f1d4-49f7-b6a6-f49b9eb9349b"",
+                    ""id"": ""c1d7617b-c99e-45de-9365-f2ab387dc9af"",
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
                 },
                 {
-                    ""name"": ""CameraRotateAround"",
+                    ""name"": ""Finger1"",
                     ""type"": ""Value"",
-                    ""id"": ""c1d7617b-c99e-45de-9365-f2ab387dc9af"",
+                    ""id"": ""e57a51aa-b5a4-4d65-a634-737fec6b8f42"",
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -48,48 +48,70 @@ public partial class @RotateAround: IInputActionCollection2, IDisposable
             ],
             ""bindings"": [
                 {
-                    ""name"": ""OneTouch"",
-                    ""id"": ""9e75a012-4c4b-4bfc-ad78-a89c7821b010"",
+                    ""name"": ""1stTouch"",
+                    ""id"": ""04dc191d-d897-4d54-aa23-e980d63b0011"",
                     ""path"": ""OneModifier"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""ClickOnTarget"",
+                    ""action"": ""Finger0"",
                     ""isComposite"": true,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": ""modifier"",
-                    ""id"": ""344e2063-a6ca-48b7-ac46-c539e335c686"",
-                    ""path"": ""<Touchscreen>/primaryTouch/press"",
+                    ""id"": ""a35045c8-68ba-4a6d-b5e8-8b1e1bd7dcf6"",
+                    ""path"": ""<Touchscreen>/touch0/press"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""ClickOnTarget"",
+                    ""action"": ""Finger0"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
                 {
                     ""name"": ""binding"",
-                    ""id"": ""dcaaef64-bb0a-4afc-8fec-3905a1981b20"",
-                    ""path"": ""<Touchscreen>/primaryTouch/startPosition"",
+                    ""id"": ""69582bf4-2d07-4f0b-8ed6-71bc197ef9dc"",
+                    ""path"": ""<Touchscreen>/touch0/position"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""ClickOnTarget"",
+                    ""action"": ""Finger0"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
                 {
-                    ""name"": """",
-                    ""id"": ""42ebdb3c-13e8-4d20-8a97-d5d86eb38448"",
-                    ""path"": ""<Touchscreen>/primaryTouch/position"",
+                    ""name"": ""2ndTouch"",
+                    ""id"": ""4010ae62-6465-44f4-bca9-28272f028b79"",
+                    ""path"": ""OneModifier"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""CameraRotateAround"",
-                    ""isComposite"": false,
+                    ""action"": ""Finger1"",
+                    ""isComposite"": true,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""modifier"",
+                    ""id"": ""c7d4c11a-d39f-43cc-9472-de4b6a9909aa"",
+                    ""path"": ""<Touchscreen>/touch1/press"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Finger1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""binding"",
+                    ""id"": ""bef53671-abf7-4edf-8c5c-96427a714919"",
+                    ""path"": ""<Touchscreen>/touch1/position"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Finger1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 }
             ]
         }
@@ -98,8 +120,8 @@ public partial class @RotateAround: IInputActionCollection2, IDisposable
 }");
         // Rotate
         m_Rotate = asset.FindActionMap("Rotate", throwIfNotFound: true);
-        m_Rotate_ClickOnTarget = m_Rotate.FindAction("ClickOnTarget", throwIfNotFound: true);
-        m_Rotate_CameraRotateAround = m_Rotate.FindAction("CameraRotateAround", throwIfNotFound: true);
+        m_Rotate_Finger0 = m_Rotate.FindAction("Finger0", throwIfNotFound: true);
+        m_Rotate_Finger1 = m_Rotate.FindAction("Finger1", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -161,14 +183,14 @@ public partial class @RotateAround: IInputActionCollection2, IDisposable
     // Rotate
     private readonly InputActionMap m_Rotate;
     private List<IRotateActions> m_RotateActionsCallbackInterfaces = new List<IRotateActions>();
-    private readonly InputAction m_Rotate_ClickOnTarget;
-    private readonly InputAction m_Rotate_CameraRotateAround;
+    private readonly InputAction m_Rotate_Finger0;
+    private readonly InputAction m_Rotate_Finger1;
     public struct RotateActions
     {
         private @RotateAround m_Wrapper;
         public RotateActions(@RotateAround wrapper) { m_Wrapper = wrapper; }
-        public InputAction @ClickOnTarget => m_Wrapper.m_Rotate_ClickOnTarget;
-        public InputAction @CameraRotateAround => m_Wrapper.m_Rotate_CameraRotateAround;
+        public InputAction @Finger0 => m_Wrapper.m_Rotate_Finger0;
+        public InputAction @Finger1 => m_Wrapper.m_Rotate_Finger1;
         public InputActionMap Get() { return m_Wrapper.m_Rotate; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -178,22 +200,22 @@ public partial class @RotateAround: IInputActionCollection2, IDisposable
         {
             if (instance == null || m_Wrapper.m_RotateActionsCallbackInterfaces.Contains(instance)) return;
             m_Wrapper.m_RotateActionsCallbackInterfaces.Add(instance);
-            @ClickOnTarget.started += instance.OnClickOnTarget;
-            @ClickOnTarget.performed += instance.OnClickOnTarget;
-            @ClickOnTarget.canceled += instance.OnClickOnTarget;
-            @CameraRotateAround.started += instance.OnCameraRotateAround;
-            @CameraRotateAround.performed += instance.OnCameraRotateAround;
-            @CameraRotateAround.canceled += instance.OnCameraRotateAround;
+            @Finger0.started += instance.OnFinger0;
+            @Finger0.performed += instance.OnFinger0;
+            @Finger0.canceled += instance.OnFinger0;
+            @Finger1.started += instance.OnFinger1;
+            @Finger1.performed += instance.OnFinger1;
+            @Finger1.canceled += instance.OnFinger1;
         }
 
         private void UnregisterCallbacks(IRotateActions instance)
         {
-            @ClickOnTarget.started -= instance.OnClickOnTarget;
-            @ClickOnTarget.performed -= instance.OnClickOnTarget;
-            @ClickOnTarget.canceled -= instance.OnClickOnTarget;
-            @CameraRotateAround.started -= instance.OnCameraRotateAround;
-            @CameraRotateAround.performed -= instance.OnCameraRotateAround;
-            @CameraRotateAround.canceled -= instance.OnCameraRotateAround;
+            @Finger0.started -= instance.OnFinger0;
+            @Finger0.performed -= instance.OnFinger0;
+            @Finger0.canceled -= instance.OnFinger0;
+            @Finger1.started -= instance.OnFinger1;
+            @Finger1.performed -= instance.OnFinger1;
+            @Finger1.canceled -= instance.OnFinger1;
         }
 
         public void RemoveCallbacks(IRotateActions instance)
@@ -213,7 +235,7 @@ public partial class @RotateAround: IInputActionCollection2, IDisposable
     public RotateActions @Rotate => new RotateActions(this);
     public interface IRotateActions
     {
-        void OnClickOnTarget(InputAction.CallbackContext context);
-        void OnCameraRotateAround(InputAction.CallbackContext context);
+        void OnFinger0(InputAction.CallbackContext context);
+        void OnFinger1(InputAction.CallbackContext context);
     }
 }
