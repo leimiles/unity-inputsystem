@@ -63,11 +63,23 @@ public class RotateAroundManager : MonoBehaviour
     void ZoomStart(InputAction.CallbackContext context)
     {
         m_2ndFingerStartPosition = context.action.ReadValue<Vector2>();
+        m_DistanceBetween2Fingers = Vector2.Distance(m_1stFingerStartPosition, m_2ndFingerStartPosition);
     }
 
     void Zooming(InputAction.CallbackContext context)
     {
         m_2ndFingerPosition = context.action.ReadValue<Vector2>();
+
+        float distanceOffset = Vector2.Distance(m_1stFingerPosition, m_2ndFingerPosition) - m_DistanceBetween2Fingers;
+
+        if (distanceOffset > 0)
+        {
+            m_SphericalCoordinateSystem.Radius -= 5.0f * Time.deltaTime;
+        }
+        else
+        {
+            m_SphericalCoordinateSystem.Radius += 5.0f * Time.deltaTime;
+        }
         //float distanceBetweenFingers = Vector2.Distance(firstTouchPositionOnScreenSliding, context.action.ReadValue<Vector2>());
         //sphericalCoordinateSystem.Radius += 1.0f * Time.deltaTime;
     }
@@ -139,14 +151,14 @@ public class RotateAroundManager : MonoBehaviour
 
     class CountSystem
     {
-        static float timePassedInSeconds = 0.0f;
+        static float timePassedInSeconds = 0.00000001f;     // avoid /0
         private static bool active = false;
 
         public static bool Active { get => active; set => active = value; }
 
         public static void Reset()
         {
-            timePassedInSeconds = 0.0f;
+            timePassedInSeconds = 0.00000001f;
         }
 
         public static void Count()

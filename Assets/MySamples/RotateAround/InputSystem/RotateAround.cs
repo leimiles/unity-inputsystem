@@ -116,7 +116,13 @@ public partial class @RotateAround: IInputActionCollection2, IDisposable
             ]
         }
     ],
-    ""controlSchemes"": []
+    ""controlSchemes"": [
+        {
+            ""name"": ""Mobile"",
+            ""bindingGroup"": ""Mobile"",
+            ""devices"": []
+        }
+    ]
 }");
         // Rotate
         m_Rotate = asset.FindActionMap("Rotate", throwIfNotFound: true);
@@ -233,6 +239,15 @@ public partial class @RotateAround: IInputActionCollection2, IDisposable
         }
     }
     public RotateActions @Rotate => new RotateActions(this);
+    private int m_MobileSchemeIndex = -1;
+    public InputControlScheme MobileScheme
+    {
+        get
+        {
+            if (m_MobileSchemeIndex == -1) m_MobileSchemeIndex = asset.FindControlSchemeIndex("Mobile");
+            return asset.controlSchemes[m_MobileSchemeIndex];
+        }
+    }
     public interface IRotateActions
     {
         void OnFinger0(InputAction.CallbackContext context);
